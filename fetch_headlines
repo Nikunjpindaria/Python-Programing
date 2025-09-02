@@ -1,0 +1,15 @@
+import requests
+from bs4 import BeautifulSoup
+
+def fetch_headlines():
+    url = "https://www.bbc.com/news"
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    headlines = soup.find_all("h2")
+    for i, h in enumerate(headlines[:5], 1):
+        print(f"{i}. {h.text.strip()}")
+
+if __name__ == "__main__":
+    print("Top 5 BBC News Headlines:")
+    fetch_headlines()
